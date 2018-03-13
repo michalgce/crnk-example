@@ -5,6 +5,7 @@ import io.crnk.core.repository.ResourceRepositoryBase;
 import io.crnk.core.resource.list.ResourceList;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -31,6 +32,13 @@ public class AnimalsResourceRepositoryImpl extends ResourceRepositoryBase<Animal
     @Override
     public <S extends AnimalDTO> S save(final S resource) {
         ANIMALS.put(resource.getId(), resource);
+
+        return resource;
+    }
+
+    @Override
+    public <S extends AnimalDTO> S create(final S resource) {
+        ANIMALS.put(LocalDate.now().toString(), resource);
 
         return resource;
     }
